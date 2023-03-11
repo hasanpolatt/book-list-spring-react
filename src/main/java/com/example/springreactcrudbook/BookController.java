@@ -55,7 +55,4 @@ public class BookController {
         bookRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
-
-
-
 }
