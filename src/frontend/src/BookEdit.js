@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
@@ -15,12 +15,14 @@ class BookEdit extends Component {
             item: this.emptyItem
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleubmit = this.handleubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const book = await (await fetch(`/books/${this.props.match.params.id}`)).json();
+            const client = await (
+                await fetch(`/books/${this.props.match.params.id}`)
+            ).json();
             this.setState({item: client});
         }
     }
@@ -30,7 +32,6 @@ class BookEdit extends Component {
         const value = target.value;
         const name = target.name;
         let item = {...this.state.item};
-
         item[name] = value;
         this.setState({item});
     }
@@ -79,4 +80,4 @@ class BookEdit extends Component {
     }
 }
 
-export default withRouter(BookEdit);
+export default BookEdit;
